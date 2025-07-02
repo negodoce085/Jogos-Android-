@@ -2,31 +2,66 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Painel Admin - Adicionar Jogo</title>
-  <style>
-    body { font-family: Arial; background: #f9f9f9; padding: 20px; }
-    form { background: #fff; padding: 20px; border-radius: 10px; max-width: 500px; margin: auto; }
-    input, textarea { width: 100%; padding: 10px; margin: 10px 0; }
-    button { padding: 10px 20px; background: blue; color: #fff; border: none; border-radius: 5px; }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Painel Admin - Jogos Android</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#00796b',
+            'primary-dark': '#004d40'
+          },
+          fontFamily: {
+            inter: ['Inter', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
 </head>
-<body>
-  <h1>Adicionar Novo Jogo</h1>
-  <form id="gameForm">
-    <input type="text" id="titulo" placeholder="Título do jogo" required />
-    <input type="text" id="imagem" placeholder="URL da imagem" required />
-    <textarea id="descricao" placeholder="Descrição do jogo" required></textarea>
-    <input type="text" id="link" placeholder="Link para download" required />
-    <button type="submit">Salvar Jogo</button>
-  </form>
+<body class="bg-gray-100 font-inter min-h-screen flex items-center justify-center p-4">
+  <div id="login" class="bg-white p-6 rounded-lg shadow-md w-full max-w-md">
+    <h2 class="text-2xl font-semibold text-primary mb-4">Login de Administrador</h2>
+    <input
+      type="password"
+      id="password"
+      placeholder="Digite a senha"
+      class="w-full p-3 border rounded mb-4"
+    />
+    <button
+      onclick="checkPassword()"
+      class="w-full bg-primary text-white py-2 rounded hover:bg-primary-dark"
+    >
+      Entrar
+    </button>
+    <p id="error" class="text-red-600 mt-2 hidden">Senha incorreta. Tente novamente.</p>
+  </div>
+
+  <div id="adminPanel" class="hidden w-full max-w-3xl bg-white p-6 rounded-lg shadow-md">
+    <h2 class="text-2xl font-bold text-primary mb-4">Painel de Administração</h2>
+    <!-- Aqui você pode colocar o formulário para adicionar jogos -->
+    <p class="text-gray-700">Bem-vindo ao painel admin! Aqui você poderá gerenciar os jogos.</p>
+  </div>
 
   <script>
-    document.getElementById('gameForm').addEventListener('submit', function (e) {
-      e.preventDefault();
-      alert("Funcionalidade de gravação direta no arquivo JSON não funciona offline ou sem backend.
-Edite o arquivo 'games.json' manualmente ou use backend como Netlify/Firebase.");
-    });
+    const correctPassword = "1234"; // Troque essa senha para algo mais seguro depois
+
+    function checkPassword() {
+      const input = document.getElementById("password").value;
+      const login = document.getElementById("login");
+      const adminPanel = document.getElementById("adminPanel");
+      const error = document.getElementById("error");
+
+      if (input === correctPassword) {
+        login.classList.add("hidden");
+        adminPanel.classList.remove("hidden");
+      } else {
+        error.classList.remove("hidden");
+      }
+    }
   </script>
 </body>
 </html>
