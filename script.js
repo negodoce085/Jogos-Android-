@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { getFirestore, collection, addDoc, getDocs, updateDoc, doc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAoSsX3c__n6b4wrr7CQ660LGCXooAhtrk",
@@ -13,12 +13,16 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+let jogosRefs = [];
 
 async function fetchGames() {
   const querySnapshot = await getDocs(collection(db, "jogos"));
   const games = [];
-  querySnapshot.forEach((doc) => {
-    games.push(doc.data());
+  jogosRefs = [];
+  querySnapshot.forEach((docSnap) => {
+    const data = docSnap.data();
+    games.push({ ...data, id: docSnap.id });
+    jogosRefs.push(docSnap.ref);
   });
   displayGames(games);
 }
@@ -27,18 +31,34 @@ function displayGames(games) {
   const container = document.getElementById("gamesContainer");
   const search = document.getElementById("search").value.toLowerCase();
   container.innerHTML = "";
-  games.filter(game => game.title.toLowerCase().includes(search)).forEach((game) => {
-    const div = document.createElement("div");
-    div.className = "bg-white dark:bg-gray-800 p-4 rounded shadow";
-    div.innerHTML = `
-      <img src="${game.image}" alt="${game.title}" class="w-full h-48 object-cover rounded mb-2">
-      <h2 class="text-xl font-semibold">${game.title}</h2>
-      <p class="text-sm text-gray-500 capitalize">${game.category}</p>
-      <a href="${game.download}" class="block mt-2 bg-blue-600 text-white text-center px-3 py-2 rounded hover:bg-blue-800">⬇️ Baixar APK</a>
-    `;
-    container.appendChild(div);
-  });
+  games
+    .filter(game => game.title.toLowerCase().includes(search))
+    .forEach((game, index) => {
+      const div = document.createElement("div");
+      const rating = game.rating || 0;
+      div.className = "bg-white dark:bg-gray-800 p-4 rounded shadow";
+      div.innerHTML = `
+        <img src="${game.image}" alt="${game.title}" class="w-full h-48 object-cover rounded mb-2">
+        <h2 class="text-xl font-semibold">${game.title}</h2>
+        <p class="text-sm text-gray-500 capitalize">${game.category}</p>
+        <div class="flex text-yellow-400 my-2">
+          ${[1,2,3,4,5].map(star => `
+            <i class="fas fa-star${star <= rating ? '' : '-o'} cursor-pointer" onclick="rateGame('${game.id}', ${star})"></i>
+          `).join('')}
+        </div>
+        <a href="${game.download}" class="block bg-blue-600 text-white text-center px-3 py-2 rounded hover:bg-blue-800">⬇️ Baixar APK</a>
+      `;
+      container.appendChild(div);
+    });
 }
+
+window.rateGame = async (gameId, star) => {
+  const ref = jogosRefs.find(r => r.id === gameId);
+  if (ref) {
+    await updateDoc(ref, { rating: star });
+    fetchGames();
+  }
+};
 
 document.getElementById("addGameBtn").addEventListener("click", async () => {
   const title = document.getElementById("newTitle").value;
@@ -47,7 +67,7 @@ document.getElementById("addGameBtn").addEventListener("click", async () => {
   const download = document.getElementById("newLink").value;
 
   if (title && category && image && download) {
-    await addDoc(collection(db, "jogos"), { title, category, image, download });
+    await addDoc(collection(db, "jogos"), { title, category, image, download, rating: 0 });
     document.getElementById("newTitle").value = "";
     document.getElementById("newCategory").value = "";
     document.getElementById("newImage").value = "";
