@@ -3,14 +3,27 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jogos Android - Admin</title>
+  <title>Jogos Android com Login</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script type="module" src="script.js" defer></script>
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
   <div class="container mx-auto px-4 py-6">
     <h1 class="text-3xl font-bold mb-4">Jogos Android</h1>
+
+    <div id="authArea" class="mb-6">
+      <div id="loginForm">
+        <input type="email" id="email" placeholder="E-mail"
+          class="w-full p-2 border rounded mb-2 text-gray-900 dark:text-white bg-white dark:bg-gray-800" />
+        <input type="password" id="password" placeholder="Senha"
+          class="w-full p-2 border rounded mb-2 text-gray-900 dark:text-white bg-white dark:bg-gray-800" />
+        <button onclick="login()" class="bg-blue-600 text-white px-4 py-2 rounded w-full">Entrar</button>
+      </div>
+      <div id="logoutArea" class="hidden">
+        <p class="mb-2">🔐 Logado como <span id="userEmail" class="font-semibold"></span></p>
+        <button onclick="logout()" class="bg-red-600 text-white px-4 py-2 rounded">Sair</button>
+      </div>
+    </div>
 
     <div class="mb-4">
       <input type="text" id="search" oninput="searchGames()" placeholder="Pesquisar jogo..."
@@ -19,28 +32,16 @@
 
     <div id="gamesContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
 
-    <!-- Botão de login -->
-    <div class="mt-10">
-      <button onclick="showLogin()" class="bg-yellow-600 text-white px-4 py-2 rounded">🔐 Entrar como Admin</button>
-    </div>
-
-    <!-- Área de login -->
-    <div id="adminLogin" class="mt-4 hidden">
-      <input type="password" id="adminPassword" placeholder="Digite a senha"
-        class="w-full p-2 border rounded mb-2 text-gray-900 dark:text-white bg-white dark:bg-gray-800" />
-      <button onclick="checkAdmin()" class="bg-blue-600 text-white px-4 py-2 rounded">Entrar</button>
-    </div>
-
     <!-- Formulário de admin -->
     <div id="adminPanel" class="mt-10 p-4 bg-white dark:bg-gray-800 rounded shadow hidden">
       <h2 class="text-xl font-semibold mb-2">Adicionar novo jogo</h2>
       <input type="text" id="newTitle" placeholder="Nome do jogo"
         class="w-full p-2 border rounded mb-2 text-gray-900 dark:text-white bg-white dark:bg-gray-800" />
-      <input type="text" id="newCategory" placeholder="Categoria (ex: ação)"
+      <input type="text" id="newCategory" placeholder="Categoria"
         class="w-full p-2 border rounded mb-2 text-gray-900 dark:text-white bg-white dark:bg-gray-800" />
       <input type="text" id="newImage" placeholder="Link da imagem"
         class="w-full p-2 border rounded mb-2 text-gray-900 dark:text-white bg-white dark:bg-gray-800" />
-      <input type="text" id="newLink" placeholder="Link de download APK"
+      <input type="text" id="newLink" placeholder="Link de download"
         class="w-full p-2 border rounded mb-2 text-gray-900 dark:text-white bg-white dark:bg-gray-800" />
       <button id="addGameBtn" class="bg-green-600 hover:bg-green-800 text-white px-4 py-2 rounded">Adicionar</button>
     </div>

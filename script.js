@@ -1,5 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getFirestore, collection, addDoc, getDocs, updateDoc, doc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAoSsX3c__n6b4wrr7CQ660LGCXooAhtrk",
@@ -13,6 +14,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const auth = getAuth(app);
 let jogosRefs = [];
 
 async function fetchGames() {
@@ -60,6 +62,37 @@ window.rateGame = async (gameId, star) => {
   }
 };
 
+window.searchGames = () => fetchGames();
+window.onload = () => {
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      document.getElementById("adminPanel").classList.remove("hidden");
+      document.getElementById("loginForm").classList.add("hidden");
+      document.getElementById("logoutArea").classList.remove("hidden");
+      document.getElementById("userEmail").textContent = user.email;
+    } else {
+      document.getElementById("adminPanel").classList.add("hidden");
+      document.getElementById("loginForm").classList.remove("hidden");
+      document.getElementById("logoutArea").classList.add("hidden");
+    }
+    fetchGames();
+  });
+};
+
+window.login = async () => {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+  } catch (error) {
+    alert("Erro no login: " + error.message);
+  }
+};
+
+window.logout = () => {
+  signOut(auth);
+};
+
 document.getElementById("addGameBtn").addEventListener("click", async () => {
   const title = document.getElementById("newTitle").value;
   const category = document.getElementById("newCategory").value;
@@ -73,22 +106,5 @@ document.getElementById("addGameBtn").addEventListener("click", async () => {
     document.getElementById("newImage").value = "";
     document.getElementById("newLink").value = "";
     fetchGames();
-  }
-});
-
-window.searchGames = () => fetchGames();
-window.onload = fetchGames;
-
-window.showLogin = () => {
-  document.getElementById("adminLogin").classList.remove("hidden");
-};
-
-window.checkAdmin = () => {
-  const senha = document.getElementById("adminPassword").value;
-  if (senha === "131281") {
-    document.getElementById("adminPanel").classList.remove("hidden");
-    document.getElementById("adminLogin").classList.add("hidden");
-  } else {
-    alert("Senha incorreta.");
   }
 };
