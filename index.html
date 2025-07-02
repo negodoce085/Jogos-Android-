@@ -1,50 +1,88 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jogos Android com Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jogos Android - Melhorado</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script type="module" src="script.js" defer></script>
 </head>
-<body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
-  <div class="container mx-auto px-4 py-6">
-    <h1 class="text-3xl font-bold mb-4">Jogos Android</h1>
+<body class="bg-gray-100 text-gray-800 font-sans">
 
-    <div id="authArea" class="mb-6">
-      <div id="loginForm">
-        <input type="email" id="email" placeholder="E-mail"
-          class="w-full p-2 border rounded mb-2 text-gray-900 dark:text-white bg-white dark:bg-gray-800" />
-        <input type="password" id="password" placeholder="Senha"
-          class="w-full p-2 border rounded mb-2 text-gray-900 dark:text-white bg-white dark:bg-gray-800" />
-        <button onclick="login()" class="bg-blue-600 text-white px-4 py-2 rounded w-full">Entrar</button>
+  <!-- Menu fixo -->
+  <header class="bg-white shadow fixed top-0 left-0 right-0 z-50">
+    <nav class="container mx-auto flex items-center justify-between p-4">
+      <a href="index.html" class="text-2xl font-bold text-indigo-600">Jogos Android</a>
+      <ul class="hidden md:flex space-x-6 text-gray-600">
+        <li><a href="index.html" class="hover:text-indigo-600 transition">Início</a></li>
+        <li><a href="https://negodoce085.github.io/Jogos-Android-/admin.html" class="hover:text-indigo-600 transition">Admin</a></li>
+        <li><a href="contato.html" class="hover:text-indigo-600 transition">Contato</a></li>
+      </ul>
+      <button class="md:hidden text-gray-600 focus:outline-none" id="menu-btn" aria-label="Abrir menu">
+        <!-- ícone hamburger -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+          <path d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </nav>
+    <div class="md:hidden bg-white shadow" id="mobile-menu" style="display: none;">
+      <ul class="flex flex-col p-4 space-y-2">
+        <li><a href="index.html" class="block hover:text-indigo-600 transition">Início</a></li>
+        <li><a href="https://negodoce085.github.io/Jogos-Android-/admin.html" class="block hover:text-indigo-600 transition">Admin</a></li>
+        <li><a href="contato.html" class="block hover:text-indigo-600 transition">Contato</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Espaço para compensar o menu fixo -->
+  <div class="h-16"></div>
+
+  <!-- Conteúdo principal -->
+  <main class="container mx-auto px-4 py-6">
+
+    <h1 class="text-3xl font-bold mb-6 text-center text-indigo-600">Nossos Jogos</h1>
+
+    <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      <!-- Aqui substituí os jogos que estavam no seu index -->
+      
+      <div class="bg-white rounded-lg shadow hover:shadow-lg transition p-4 flex flex-col">
+        <img src="imagens/SCR.png" alt="SCR" class="rounded-md mb-4" />
+        <h2 class="text-xl font-semibold mb-2">SCR</h2>
+        <a href="SCR.html" class="inline-block bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition text-center mt-auto">Jogar</a>
       </div>
-      <div id="logoutArea" class="hidden">
-        <p class="mb-2">🔐 Logado como <span id="userEmail" class="font-semibold"></span></p>
-        <button onclick="logout()" class="bg-red-600 text-white px-4 py-2 rounded">Sair</button>
+
+      <div class="bg-white rounded-lg shadow hover:shadow-lg transition p-4 flex flex-col">
+        <img src="imagens/discord.png" alt="Discord" class="rounded-md mb-4" />
+        <h2 class="text-xl font-semibold mb-2">Discord</h2>
+        <a href="discord.html" class="inline-block bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition text-center mt-auto">Jogar</a>
+      </div>
+
+      <div class="bg-white rounded-lg shadow hover:shadow-lg transition p-4 flex flex-col">
+        <img src="imagens/jogos.png" alt="Jogos" class="rounded-md mb-4" />
+        <h2 class="text-xl font-semibold mb-2">Jogos</h2>
+        <a href="jogos.html" class="inline-block bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition text-center mt-auto">Jogar</a>
+      </div>
+
+      <div class="bg-white rounded-lg shadow hover:shadow-lg transition p-4 flex flex-col">
+        <img src="imagens/GT.png" alt="GT" class="rounded-md mb-4" />
+        <h2 class="text-xl font-semibold mb-2">GT</h2>
+        <a href="GT.html" class="inline-block bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition text-center mt-auto">Jogar</a>
       </div>
     </div>
 
-    <div class="mb-4">
-      <input type="text" id="search" oninput="searchGames()" placeholder="Pesquisar jogo..."
-        class="w-full px-4 py-2 border rounded text-gray-900 dark:text-white bg-white dark:bg-gray-800" />
-    </div>
+  </main>
 
-    <div id="gamesContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+  <script>
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
 
-    <!-- Formulário de admin -->
-    <div id="adminPanel" class="mt-10 p-4 bg-white dark:bg-gray-800 rounded shadow hidden">
-      <h2 class="text-xl font-semibold mb-2">Adicionar novo jogo</h2>
-      <input type="text" id="newTitle" placeholder="Nome do jogo"
-        class="w-full p-2 border rounded mb-2 text-gray-900 dark:text-white bg-white dark:bg-gray-800" />
-      <input type="text" id="newCategory" placeholder="Categoria"
-        class="w-full p-2 border rounded mb-2 text-gray-900 dark:text-white bg-white dark:bg-gray-800" />
-      <input type="text" id="newImage" placeholder="Link da imagem"
-        class="w-full p-2 border rounded mb-2 text-gray-900 dark:text-white bg-white dark:bg-gray-800" />
-      <input type="text" id="newLink" placeholder="Link de download"
-        class="w-full p-2 border rounded mb-2 text-gray-900 dark:text-white bg-white dark:bg-gray-800" />
-      <button id="addGameBtn" class="bg-green-600 hover:bg-green-800 text-white px-4 py-2 rounded">Adicionar</button>
-    </div>
-  </div>
+    menuBtn.addEventListener('click', () => {
+      if (mobileMenu.style.display === 'none') {
+        mobileMenu.style.display = 'block';
+      } else {
+        mobileMenu.style.display = 'none';
+      }
+    });
+  </script>
 </body>
 </html>
