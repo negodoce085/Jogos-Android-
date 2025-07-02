@@ -1,65 +1,31 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Painel Admin - Jogos Android</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Painel Admin</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            primary: '#00796b',
-            'primary-dark': '#004d40'
-          },
-          fontFamily: {
-            inter: ['Inter', 'sans-serif']
-          }
-        }
-      }
-    }
-  </script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
 </head>
-<body class="bg-gray-100 font-inter min-h-screen flex items-center justify-center p-4">
-  <div id="login" class="bg-white p-6 rounded-lg shadow-md w-full max-w-md">
-    <h2 class="text-2xl font-semibold text-primary mb-4">Login de Administrador</h2>
-    <input
-      type="password"
-      id="password"
-      placeholder="Digite a senha"
-      class="w-full p-3 border rounded mb-4"
-    />
-    <button
-      onclick="checkPassword()"
-      class="w-full bg-primary text-white py-2 rounded hover:bg-primary-dark"
-    >
-      Entrar
-    </button>
-    <p id="error" class="text-red-600 mt-2 hidden">Senha incorreta. Tente novamente.</p>
+<body class="bg-gray-100 text-gray-900 flex items-center justify-center min-h-screen">
+  <div id="loginBox" class="bg-white p-8 rounded shadow max-w-sm w-full">
+    <h2 class="text-xl font-bold mb-4">Painel Admin</h2>
+    <input id="senha" type="password" placeholder="Digite a senha" class="w-full border p-2 rounded mb-4" />
+    <button onclick="verificarSenha()" class="bg-primary text-white px-4 py-2 rounded w-full">Entrar</button>
   </div>
 
-  <div id="adminPanel" class="hidden w-full max-w-3xl bg-white p-6 rounded-lg shadow-md">
-    <h2 class="text-2xl font-bold text-primary mb-4">Painel de Administração</h2>
-    <!-- Aqui você pode colocar o formulário para adicionar jogos -->
-    <p class="text-gray-700">Bem-vindo ao painel admin! Aqui você poderá gerenciar os jogos.</p>
+  <div id="adminPanel" class="hidden p-6">
+    <h2 class="text-2xl font-bold mb-4">Bem-vindo ao painel admin!</h2>
+    <p>Aqui você poderá futuramente cadastrar jogos dinamicamente.</p>
   </div>
 
   <script>
-    const correctPassword = "1234"; // Troque essa senha para algo mais seguro depois
-
-    function checkPassword() {
-      const input = document.getElementById("password").value;
-      const login = document.getElementById("login");
-      const adminPanel = document.getElementById("adminPanel");
-      const error = document.getElementById("error");
-
-      if (input === correctPassword) {
-        login.classList.add("hidden");
-        adminPanel.classList.remove("hidden");
+    function verificarSenha() {
+      const senha = document.getElementById('senha').value;
+      if (senha === '1234') {
+        document.getElementById('loginBox').style.display = 'none';
+        document.getElementById('adminPanel').classList.remove('hidden');
       } else {
-        error.classList.remove("hidden");
+        alert('Senha incorreta!');
       }
     }
   </script>
