@@ -1,60 +1,41 @@
-const jogos = [
-  {
-    nome: "Corrida Extrema",
-    categoria: "Corrida",
-    imagem: "jogo1.jpg",
-    descricao: "Participe de corridas emocionantes com gráficos incríveis.",
-  },
-  {
-    nome: "Guerra Espacial",
-    categoria: "Ação",
-    imagem: "jogo2.jpg",
-    descricao: "Lute contra invasores alienígenas em batalhas épicas.",
-  },
-  {
-    nome: "Desafio Mental",
-    categoria: "Quebra-cabeça",
-    imagem: "jogo3.jpg",
-    descricao: "Exercite sua mente com desafios e enigmas complexos.",
-  },
-  {
-    nome: "Campeonato de Futebol",
-    categoria: "Esporte",
-    imagem: "jogo4.jpg",
-    descricao: "Participe de campeonatos emocionantes e vença seu time rival.",
-  },
+const games = [
+  { title: "Corrida Maluca", category: "corrida", image: "jogo1.jpg" },
+  { title: "Puzzle Master", category: "puzzle", image: "jogo2.jpg" },
+  { title: "Batalha Espacial", category: "ação", image: "jogo3.jpg" },
+  { title: "Desafio Mental", category: "puzzle", image: "jogo4.jpg" },
 ];
 
-function renderizarJogos(lista) {
+let currentCategory = "todos";
+
+function displayGames() {
   const container = document.getElementById("gamesContainer");
+  const search = document.getElementById("search").value.toLowerCase();
   container.innerHTML = "";
-  lista.forEach((jogo) => {
-    container.innerHTML += `
-      <div class="relative bg-white dark:bg-gray-800 rounded-xl shadow p-5 hover:-translate-y-1 transition-transform">
-        <div class="absolute top-4 right-4 bg-gray-200 dark:bg-gray-700 text-sm px-3 py-1 rounded-full flex items-center gap-2">
-          <i class="fas fa-tag"></i> ${jogo.categoria}
-        </div>
-        <h2 class="text-xl font-semibold text-primary mb-2">${jogo.nome}</h2>
-        <img src="${jogo.imagem}" alt="${jogo.nome}" class="rounded-lg mb-4" />
-        <p class="text-sm mb-4">${jogo.descricao}</p>
-        <a class="bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-lg font-semibold inline-block text-center" href="#">Baixar APK</a>
-      </div>
+
+  const filteredGames = games.filter(game =>
+    (currentCategory === "todos" || game.category === currentCategory) &&
+    game.title.toLowerCase().includes(search)
+  );
+
+  filteredGames.forEach(game => {
+    const div = document.createElement("div");
+    div.className = "bg-white dark:bg-gray-800 p-4 rounded shadow";
+    div.innerHTML = `
+      <img src="${game.image}" alt="${game.title}" class="w-full h-48 object-cover rounded mb-2">
+      <h2 class="text-xl font-semibold">${game.title}</h2>
+      <p class="text-sm text-gray-500 capitalize">${game.category}</p>
     `;
+    container.appendChild(div);
   });
 }
 
-function filtrarJogos() {
-  const termo = document.getElementById("searchInput").value.toLowerCase();
-  const filtrados = jogos.filter(
-    (jogo) =>
-      jogo.nome.toLowerCase().includes(termo) ||
-      jogo.categoria.toLowerCase().includes(termo)
-  );
-  renderizarJogos(filtrados);
+function filterCategory(cat) {
+  currentCategory = cat;
+  displayGames();
 }
 
-function toggleDark() {
-  document.body.classList.toggle("dark");
+function searchGames() {
+  displayGames();
 }
 
-renderizarJogos(jogos);
+window.onload = displayGames;
