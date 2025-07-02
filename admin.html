@@ -1,33 +1,61 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
   <title>Painel Admin</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 text-gray-900 flex items-center justify-center min-h-screen">
-  <div id="loginBox" class="bg-white p-8 rounded shadow max-w-sm w-full">
-    <h2 class="text-xl font-bold mb-4">Painel Admin</h2>
-    <input id="senha" type="password" placeholder="Digite a senha" class="w-full border p-2 rounded mb-4" />
-    <button onclick="verificarSenha()" class="bg-primary text-white px-4 py-2 rounded w-full">Entrar</button>
-  </div>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
 
-  <div id="adminPanel" class="hidden p-6">
-    <h2 class="text-2xl font-bold mb-4">Bem-vindo ao painel admin!</h2>
-    <p>Aqui você poderá futuramente cadastrar jogos dinamicamente.</p>
+  <!-- Proteção por senha -->
+  <script>
+    if (localStorage.getItem("autenticado") !== "true") {
+      window.location.href = "login.html";
+    }
+  </script>
+
+  <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-xl">
+    <h1 class="text-3xl font-bold text-center text-indigo-600 mb-6">Adicionar Novo Jogo</h1>
+
+    <form id="formulario" class="space-y-4">
+      <div>
+        <label class="block mb-1 font-medium text-gray-700">Nome do jogo</label>
+        <input type="text" id="nome" class="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+      </div>
+
+      <div>
+        <label class="block mb-1 font-medium text-gray-700">Imagem (URL)</label>
+        <input type="text" id="imagem" class="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+      </div>
+
+      <div>
+        <label class="block mb-1 font-medium text-gray-700">Link do jogo (URL ou página)</label>
+        <input type="text" id="link" class="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+      </div>
+
+      <div class="text-center">
+        <button type="submit" class="bg-indigo-600 text-white px-6 py-2 rounded hover:bg-indigo-700 transition">Adicionar Jogo</button>
+      </div>
+    </form>
+
+    <p id="mensagem" class="text-green-600 text-center mt-4 hidden">Jogo adicionado com sucesso!</p>
   </div>
 
   <script>
-    function verificarSenha() {
-      const senha = document.getElementById('senha').value;
-      if (senha === '1234') {
-        document.getElementById('loginBox').style.display = 'none';
-        document.getElementById('adminPanel').classList.remove('hidden');
-      } else {
-        alert('Senha incorreta!');
-      }
-    }
+    document.getElementById("formulario").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const nome = document.getElementById("nome").value;
+      const imagem = document.getElementById("imagem").value;
+      const link = document.getElementById("link").value;
+
+      console.log("Novo jogo:", nome, imagem, link);
+
+      // Aqui você pode salvar em um JSON, localStorage ou enviar para um backend (futuro)
+      document.getElementById("formulario").reset();
+      document.getElementById("mensagem").classList.remove("hidden");
+    });
   </script>
+
 </body>
 </html>
