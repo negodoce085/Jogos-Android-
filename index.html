@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jogos Android com Avaliação</title>
+  <title>Jogos Android - Admin</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script type="module" src="script.js" defer></script>
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
@@ -19,7 +19,20 @@
 
     <div id="gamesContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
 
-    <div class="mt-10 p-4 bg-white dark:bg-gray-800 rounded shadow">
+    <!-- Botão de login -->
+    <div class="mt-10">
+      <button onclick="showLogin()" class="bg-yellow-600 text-white px-4 py-2 rounded">🔐 Entrar como Admin</button>
+    </div>
+
+    <!-- Área de login -->
+    <div id="adminLogin" class="mt-4 hidden">
+      <input type="password" id="adminPassword" placeholder="Digite a senha"
+        class="w-full p-2 border rounded mb-2 text-gray-900 dark:text-white bg-white dark:bg-gray-800" />
+      <button onclick="checkAdmin()" class="bg-blue-600 text-white px-4 py-2 rounded">Entrar</button>
+    </div>
+
+    <!-- Formulário de admin -->
+    <div id="adminPanel" class="mt-10 p-4 bg-white dark:bg-gray-800 rounded shadow hidden">
       <h2 class="text-xl font-semibold mb-2">Adicionar novo jogo</h2>
       <input type="text" id="newTitle" placeholder="Nome do jogo"
         class="w-full p-2 border rounded mb-2 text-gray-900 dark:text-white bg-white dark:bg-gray-800" />

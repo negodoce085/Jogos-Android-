@@ -33,9 +33,9 @@ function displayGames(games) {
   container.innerHTML = "";
   games
     .filter(game => game.title.toLowerCase().includes(search))
-    .forEach((game, index) => {
-      const div = document.createElement("div");
+    .forEach((game) => {
       const rating = game.rating || 0;
+      const div = document.createElement("div");
       div.className = "bg-white dark:bg-gray-800 p-4 rounded shadow";
       div.innerHTML = `
         <img src="${game.image}" alt="${game.title}" class="w-full h-48 object-cover rounded mb-2">
@@ -78,3 +78,17 @@ document.getElementById("addGameBtn").addEventListener("click", async () => {
 
 window.searchGames = () => fetchGames();
 window.onload = fetchGames;
+
+window.showLogin = () => {
+  document.getElementById("adminLogin").classList.remove("hidden");
+};
+
+window.checkAdmin = () => {
+  const senha = document.getElementById("adminPassword").value;
+  if (senha === "131281") {
+    document.getElementById("adminPanel").classList.remove("hidden");
+    document.getElementById("adminLogin").classList.add("hidden");
+  } else {
+    alert("Senha incorreta.");
+  }
+};
