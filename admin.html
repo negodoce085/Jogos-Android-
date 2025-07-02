@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Painel Admin - Adicionar Jogo</title>
+  <style>
+    body { font-family: Arial; background: #f9f9f9; padding: 20px; }
+    form { background: #fff; padding: 20px; border-radius: 10px; max-width: 500px; margin: auto; }
+    input, textarea { width: 100%; padding: 10px; margin: 10px 0; }
+    button { padding: 10px 20px; background: blue; color: #fff; border: none; border-radius: 5px; }
+  </style>
+</head>
+<body>
+  <h1>Adicionar Novo Jogo</h1>
+  <form id="gameForm">
+    <input type="text" id="titulo" placeholder="Título do jogo" required />
+    <input type="text" id="imagem" placeholder="URL da imagem" required />
+    <textarea id="descricao" placeholder="Descrição do jogo" required></textarea>
+    <input type="text" id="link" placeholder="Link para download" required />
+    <button type="submit">Salvar Jogo</button>
+  </form>
+
+  <script>
+    document.getElementById('gameForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      alert("Funcionalidade de gravação direta no arquivo JSON não funciona offline ou sem backend.
+Edite o arquivo 'games.json' manualmente ou use backend como Netlify/Firebase.");
+    });
+  </script>
+</body>
+</html>
