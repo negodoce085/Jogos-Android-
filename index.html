@@ -1,88 +1,45 @@
 <!DOCTYPE html>
-<html lang="pt-BR" class="scroll-smooth">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Jogos Android - Melhorado</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-100 text-gray-800 font-sans">
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jogos Android</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
+    <style>
+      body { font-family: 'Poppins', sans-serif; }
+    </style>
+    <script type="module" src="script.js" defer></script>
+  </head>
+  <body class="bg-gray-950 text-white min-h-screen">
+    <!-- Header -->
+    <header class="bg-gray-900 shadow-md sticky top-0 z-10">
+      <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+        <h1 class="text-2xl font-bold text-green-400">🎮 Jogos Android</h1>
+        <a href="admin.html" class="text-sm text-gray-300 hover:text-white transition">Painel Admin</a>
+      </div>
+    </header>
 
-  <!-- Menu fixo -->
-  <header class="bg-white shadow fixed top-0 left-0 right-0 z-50">
-    <nav class="container mx-auto flex items-center justify-between p-4">
-      <a href="index.html" class="text-2xl font-bold text-indigo-600">Jogos Android</a>
-      <ul class="hidden md:flex space-x-6 text-gray-600">
-        <li><a href="index.html" class="hover:text-indigo-600 transition">Início</a></li>
-        <li><a href="https://negodoce085.github.io/Jogos-Android-/admin.html" class="hover:text-indigo-600 transition">Admin</a></li>
-        <li><a href="contato.html" class="hover:text-indigo-600 transition">Contato</a></li>
-      </ul>
-      <button class="md:hidden text-gray-600 focus:outline-none" id="menu-btn" aria-label="Abrir menu">
-        <!-- ícone hamburger -->
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2"
-          stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-          <path d="M4 6h16M4 12h16M4 18h16" />
+    <!-- Search Bar -->
+    <div class="container mx-auto px-4 py-6">
+      <div class="relative max-w-lg mx-auto">
+        <input type="text" id="searchInput" placeholder="Buscar jogos..."
+          class="w-full p-3 rounded-full text-black pl-10 shadow focus:outline-none" />
+        <svg class="w-5 h-5 text-gray-500 absolute left-3 top-3" fill="currentColor" viewBox="0 0 20 20">
+          <path
+            d="M12.9 14.32a8 8 0 111.414-1.414l5.387 5.387-1.414 1.414-5.387-5.387zM8 14a6 6 0 100-12 6 6 0 000 12z" />
         </svg>
-      </button>
-    </nav>
-    <div class="md:hidden bg-white shadow" id="mobile-menu" style="display: none;">
-      <ul class="flex flex-col p-4 space-y-2">
-        <li><a href="index.html" class="block hover:text-indigo-600 transition">Início</a></li>
-        <li><a href="https://negodoce085.github.io/Jogos-Android-/admin.html" class="block hover:text-indigo-600 transition">Admin</a></li>
-        <li><a href="contato.html" class="block hover:text-indigo-600 transition">Contato</a></li>
-      </ul>
-    </div>
-  </header>
-
-  <!-- Espaço para compensar o menu fixo -->
-  <div class="h-16"></div>
-
-  <!-- Conteúdo principal -->
-  <main class="container mx-auto px-4 py-6">
-
-    <h1 class="text-3xl font-bold mb-6 text-center text-indigo-600">Nossos Jogos</h1>
-
-    <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-      <!-- Aqui substituí os jogos que estavam no seu index -->
-      
-      <div class="bg-white rounded-lg shadow hover:shadow-lg transition p-4 flex flex-col">
-        <img src="imagens/SCR.png" alt="SCR" class="rounded-md mb-4" />
-        <h2 class="text-xl font-semibold mb-2">SCR</h2>
-        <a href="SCR.html" class="inline-block bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition text-center mt-auto">Jogar</a>
-      </div>
-
-      <div class="bg-white rounded-lg shadow hover:shadow-lg transition p-4 flex flex-col">
-        <img src="imagens/discord.png" alt="Discord" class="rounded-md mb-4" />
-        <h2 class="text-xl font-semibold mb-2">Discord</h2>
-        <a href="discord.html" class="inline-block bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition text-center mt-auto">Jogar</a>
-      </div>
-
-      <div class="bg-white rounded-lg shadow hover:shadow-lg transition p-4 flex flex-col">
-        <img src="imagens/jogos.png" alt="Jogos" class="rounded-md mb-4" />
-        <h2 class="text-xl font-semibold mb-2">Jogos</h2>
-        <a href="jogos.html" class="inline-block bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition text-center mt-auto">Jogar</a>
-      </div>
-
-      <div class="bg-white rounded-lg shadow hover:shadow-lg transition p-4 flex flex-col">
-        <img src="imagens/GT.png" alt="GT" class="rounded-md mb-4" />
-        <h2 class="text-xl font-semibold mb-2">GT</h2>
-        <a href="GT.html" class="inline-block bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition text-center mt-auto">Jogar</a>
       </div>
     </div>
 
-  </main>
+    <!-- Lista de Jogos -->
+    <main class="container mx-auto px-4 pb-10">
+      <div id="gamesList" class="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"></div>
+    </main>
 
-  <script>
-    const menuBtn = document.getElementById('menu-btn');
-    const mobileMenu = document.getElementById('mobile-menu');
-
-    menuBtn.addEventListener('click', () => {
-      if (mobileMenu.style.display === 'none') {
-        mobileMenu.style.display = 'block';
-      } else {
-        mobileMenu.style.display = 'none';
-      }
-    });
-  </script>
-</body>
+    <!-- Rodapé -->
+    <footer class="bg-gray-900 text-center text-sm text-gray-400 py-4">
+      © 2025 - Desenvolvido por NegoDoce
+    </footer>
+  </body>
 </html>
