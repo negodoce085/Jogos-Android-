@@ -16,7 +16,6 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 
-// Login
 window.login = async () => {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
@@ -27,12 +26,10 @@ window.login = async () => {
   }
 };
 
-// Logout
 window.logout = () => {
   signOut(auth);
 };
 
-// Detectar login
 onAuthStateChanged(auth, (user) => {
   if (user) {
     document.getElementById("adminPanel").classList.remove("hidden");
@@ -46,7 +43,6 @@ onAuthStateChanged(auth, (user) => {
   }
 });
 
-// Salvar jogo
 document.getElementById("addGameBtn").addEventListener("click", async () => {
   const title = document.getElementById("newTitle").value;
   const category = document.getElementById("newCategory").value;

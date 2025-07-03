@@ -4,6 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Painel Admin - Jogos Android</title>
+  <script>
+    const hostname = window.location.hostname;
+    if (!hostname.includes("negodoce085.github.io")) {
+      document.write("<style>body{background:#111;color:#fff;font-family:sans-serif;text-align:center;padding:2rem;}</style><h1>Acesso negado</h1><p>Este painel só pode ser acessado no domínio oficial.</p>");
+      throw new Error("Acesso bloqueado: domínio inválido.");
+    }
+  </script>
   <script src="https://cdn.tailwindcss.com"></script>
   <script type="module" src="admin.js" defer></script>
 </head>
@@ -11,13 +18,10 @@
   <div class="container mx-auto px-4 py-8 max-w-xl">
     <h1 class="text-2xl font-bold mb-4">🎮 Painel de Administração</h1>
 
-    <!-- Área de autenticação -->
     <div id="authArea" class="mb-6">
       <div id="loginForm">
-        <input type="email" id="email" placeholder="E-mail"
-          class="w-full p-2 border rounded mb-2 text-black" />
-        <input type="password" id="password" placeholder="Senha"
-          class="w-full p-2 border rounded mb-2 text-black" />
+        <input type="email" id="email" placeholder="E-mail" class="w-full p-2 border rounded mb-2 text-black" />
+        <input type="password" id="password" placeholder="Senha" class="w-full p-2 border rounded mb-2 text-black" />
         <button onclick="login()" class="bg-blue-600 text-white px-4 py-2 rounded w-full">Entrar</button>
       </div>
       <div id="logoutArea" class="hidden">
@@ -26,17 +30,12 @@
       </div>
     </div>
 
-    <!-- Formulário de adicionar jogos -->
     <div id="adminPanel" class="hidden bg-white text-black p-4 rounded shadow">
       <h2 class="text-xl font-semibold mb-3 text-black">Adicionar Novo Jogo</h2>
-      <input type="text" id="newTitle" placeholder="Nome do jogo"
-        class="w-full p-2 border rounded mb-2" />
-      <input type="text" id="newCategory" placeholder="Categoria"
-        class="w-full p-2 border rounded mb-2" />
-      <input type="text" id="newImage" placeholder="Link da imagem"
-        class="w-full p-2 border rounded mb-2" />
-      <input type="text" id="newLink" placeholder="Link do APK"
-        class="w-full p-2 border rounded mb-2" />
+      <input type="text" id="newTitle" placeholder="Nome do jogo" class="w-full p-2 border rounded mb-2" />
+      <input type="text" id="newCategory" placeholder="Categoria" class="w-full p-2 border rounded mb-2" />
+      <input type="text" id="newImage" placeholder="Link da imagem" class="w-full p-2 border rounded mb-2" />
+      <input type="text" id="newLink" placeholder="Link do APK" class="w-full p-2 border rounded mb-2" />
       <button id="addGameBtn" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded">Salvar</button>
     </div>
   </div>
